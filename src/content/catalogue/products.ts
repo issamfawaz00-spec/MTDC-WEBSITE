@@ -1,0 +1,238 @@
+import type { Product } from "@/lib/catalogue/types";
+
+/**
+ * PLACEHOLDER products. No real MTDC products, brands, specifications or
+ * availability are listed here. Replace with the approved product list.
+ *
+ * Field guide
+ *   id / slug            unique; slug becomes the URL /products/<slug>
+ *   brandId              an id from brands.ts
+ *   categoryId           an id from categories.ts
+ *   subcategoryId        an id from that category's subcategories (optional)
+ *   packSize             unit pack, e.g. "500ml bottle"
+ *   cartonConfiguration  case make-up, e.g. "12 x 500ml per carton"
+ *   images               [{ src: "/images/products/<file>.jpg", alt: "..." }]
+ *                        empty = elegant "photography coming soon" placeholder
+ *   availability         "available" | "limited" | "on-request" | "coming-soon" | "unconfirmed"
+ *   featured             true = shown on the Home page
+ *   channels             who the product is suited to (see CHANNEL_TYPES)
+ *   isPlaceholder        remove once the entry is real, approved data
+ */
+export const products: Product[] = [
+  {
+    id: "sample-product-01",
+    slug: "sample-product-01",
+    name: "Sample Product 01",
+    brandId: "brand-a",
+    manufacturer: "",
+    categoryId: "category-a",
+    subcategoryId: "category-a-1",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: true,
+    channels: ["supermarkets", "wholesalers", "retailers"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-02",
+    slug: "sample-product-02",
+    name: "Sample Product 02",
+    brandId: "brand-b",
+    manufacturer: "",
+    categoryId: "category-a",
+    subcategoryId: "category-a-1",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: false,
+    channels: ["supermarkets", "wholesalers", "retailers"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-03",
+    slug: "sample-product-03",
+    name: "Sample Product 03",
+    brandId: "brand-c",
+    manufacturer: "",
+    categoryId: "category-a",
+    subcategoryId: "category-a-2",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: false,
+    channels: ["supermarkets", "wholesalers", "retailers"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-04",
+    slug: "sample-product-04",
+    name: "Sample Product 04",
+    brandId: "brand-d",
+    manufacturer: "",
+    categoryId: "category-b",
+    subcategoryId: "category-b-1",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: true,
+    channels: ["supermarkets", "retailers", "open-markets"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-05",
+    slug: "sample-product-05",
+    name: "Sample Product 05",
+    brandId: "brand-a",
+    manufacturer: "",
+    categoryId: "category-b",
+    subcategoryId: "category-b-1",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: false,
+    channels: ["supermarkets", "retailers", "open-markets"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-06",
+    slug: "sample-product-06",
+    name: "Sample Product 06",
+    brandId: "brand-b",
+    manufacturer: "",
+    categoryId: "category-b",
+    subcategoryId: "category-b-2",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: false,
+    channels: ["supermarkets", "retailers", "open-markets"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-07",
+    slug: "sample-product-07",
+    name: "Sample Product 07",
+    brandId: "brand-c",
+    manufacturer: "",
+    categoryId: "category-c",
+    subcategoryId: "category-c-1",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: true,
+    channels: ["hotels", "restaurants", "caterers", "institutional"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-08",
+    slug: "sample-product-08",
+    name: "Sample Product 08",
+    brandId: "brand-d",
+    manufacturer: "",
+    categoryId: "category-c",
+    subcategoryId: "category-c-1",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: false,
+    channels: ["hotels", "restaurants", "caterers", "institutional"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-09",
+    slug: "sample-product-09",
+    name: "Sample Product 09",
+    brandId: "brand-a",
+    manufacturer: "",
+    categoryId: "category-c",
+    subcategoryId: "category-c-2",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: false,
+    channels: ["hotels", "restaurants", "caterers", "institutional"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-10",
+    slug: "sample-product-10",
+    name: "Sample Product 10",
+    brandId: "brand-b",
+    manufacturer: "",
+    categoryId: "category-d",
+    subcategoryId: "category-d-1",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: true,
+    channels: ["wholesalers", "open-markets", "institutional"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-11",
+    slug: "sample-product-11",
+    name: "Sample Product 11",
+    brandId: "brand-c",
+    manufacturer: "",
+    categoryId: "category-d",
+    subcategoryId: "category-d-1",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: false,
+    channels: ["wholesalers", "open-markets", "institutional"],
+    isPlaceholder: true,
+  },
+  {
+    id: "sample-product-12",
+    slug: "sample-product-12",
+    name: "Sample Product 12",
+    brandId: "brand-d",
+    manufacturer: "",
+    categoryId: "category-d",
+    subcategoryId: "category-d-2",
+    description:
+      "Placeholder description. Replace with the approved product description, written for trade buyers: what the product is, its key qualities and who it suits.",
+    packSize: "",
+    cartonConfiguration: "",
+    images: [],
+    availability: "unconfirmed",
+    featured: false,
+    channels: ["wholesalers", "open-markets", "institutional"],
+    isPlaceholder: true,
+  },
+];
