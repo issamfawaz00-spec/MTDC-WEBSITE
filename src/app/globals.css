@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/*
+ * MTDC design tokens.
+ * Navy ink and warm neutrals carry the design; teal is an accent used sparingly
+ * (eyebrows, focus, small highlights), never for large surfaces.
+ */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --color-ink-950: #06121a;
+  --color-ink-900: #0a1b25;
+  --color-ink-800: #112734;
+  --color-ink-700: #1f3a4a;
+  --color-ink-600: #3a5262;
+  --color-ink-500: #5b6f7c;
+  --color-ink-400: #8a9aa4;
+  --color-ink-300: #b9c4ca;
+
+  --color-canvas: #f6f5f1;
+  --color-canvas-deep: #eeece6;
+  --color-line: #e4e2dc;
+  --color-line-strong: #d3d0c8;
+
+  --color-teal-700: #0a6f6b;
+  --color-teal-600: #0b8a85;
+  --color-teal-500: #10a39d;
+  --color-teal-300: #6fd3cc;
+  --color-teal-50: #ebf7f6;
+
+  --color-amber-tint: #fbf5e6;
+  --color-amber-line: #ecd9a8;
+  --color-amber-ink: #6e5313;
+
+  --radius-card: 1rem;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-up: fade-up 0.7s var(--ease-out-soft) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-white text-ink-900 antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  ::selection {
+    @apply bg-teal-50 text-ink-900;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-teal-500;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-teal-700;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-6 bg-current;
+  }
+
+  .eyebrow-light {
+    @apply text-teal-300;
+  }
+
+  .field-input {
+    @apply block w-full rounded-lg border border-line-strong bg-white px-3.5 py-3 text-[0.95rem] text-ink-900 shadow-[0_1px_0_rgba(10,27,37,0.03)] transition-[border-color,box-shadow] duration-200 placeholder:text-ink-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/15 aria-[invalid=true]:border-red-700;
+  }
+
+  .prose-mtdc p {
+    @apply mb-5 text-[1.05rem] leading-relaxed text-ink-600 last:mb-0;
+  }
+}
+
+/* Scroll reveal: only hides content once JS has confirmed it can reveal it. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  .reveal-ready [data-reveal] {
+    transition:
+      opacity 0.8s var(--ease-out-soft),
+      transform 0.8s var(--ease-out-soft);
+  }
+}
