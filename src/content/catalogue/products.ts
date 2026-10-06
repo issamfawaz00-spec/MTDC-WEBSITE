@@ -165,7 +165,7 @@ export const products: Product[] = [
     name: "Markouk Bread",
     categoryId: "bread-bakery",
     description:
-      "Rima markouk bread, available from MTDC in different types for trade buyers in Abuja / FCT. Types and pack sizes are to be confirmed; tell us which type you need when you request a quote.",
+      "Rima markouk bread, listed by MTDC in different types for trade buyers in Abuja / FCT. Types and pack sizes are to be confirmed; tell us which type you need when you request a quote.",
     images: [],
     availability: "unconfirmed",
     featured: false,
