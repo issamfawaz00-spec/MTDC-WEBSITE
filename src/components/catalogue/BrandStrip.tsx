@@ -1,11 +1,20 @@
 import Image from "next/image";
 import type { Brand } from "@/lib/catalogue/types";
 
+/**
+ * Hairline grid of brand tiles. Tiles keep a fixed width (2 per row on
+ * phones, 4 from tablet up) and any incomplete row is centred, so there
+ * are never empty cells, whatever the number of brands. Each tile draws
+ * its own border, overlapped by 1px so neighbouring lines don't double.
+ */
 export function BrandStrip({ brands }: { brands: Brand[] }) {
   return (
-    <ul className="grid grid-cols-2 border-t border-l border-line sm:grid-cols-4">
+    <ul className="flex flex-wrap justify-center pt-px pl-px">
       {brands.map((b) => (
-        <li key={b.id} className="flex h-28 items-center justify-center border-r border-b border-line px-6 sm:h-32">
+        <li
+          key={b.id}
+          className="-mt-px -ml-px flex h-28 basis-1/2 items-center justify-center border border-line bg-white px-6 sm:h-32 sm:basis-1/4"
+        >
           {b.logo ? (
             <Image
               src={b.logo}

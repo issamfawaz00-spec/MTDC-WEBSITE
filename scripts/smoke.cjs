@@ -67,6 +67,20 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
     `home: featured product names aligned (${nameTops.join(",")})`,
   );
 
+  // Brand strip: no empty cells; an incomplete row is centred
+  const strip = await page
+    .locator("main ul")
+    .filter({ hasText: "Lamoure" })
+    .first()
+    .evaluate((ul) => {
+      const box = ul.getBoundingClientRect();
+      const items = [...ul.children].map((li) => li.getBoundingClientRect());
+      const rowTop = Math.max(...items.map((r) => r.top));
+      const lastRow = items.filter((r) => Math.abs(r.top - rowTop) < 2);
+      return { left: Math.min(...lastRow.map((r) => r.left)) - box.left, right: box.right - Math.max(...lastRow.map((r) => r.right)) };
+    });
+  check(Math.abs(strip.left - strip.right) <= 2, `home: brand strip row centred (left ${strip.left}, right ${strip.right})`);
+
   // Catalogue
   await page.goto(base + "/products");
   const cards = () => page.locator("article").count();
