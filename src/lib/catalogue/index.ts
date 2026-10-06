@@ -20,7 +20,7 @@ function toView(product: Product): ProductView {
   const category = categoryById.get(product.categoryId);
   return {
     ...product,
-    brand: brandById.get(product.brandId),
+    brand: product.brandId ? brandById.get(product.brandId) : undefined,
     category,
     subcategory: category?.subcategories.find((s) => s.id === product.subcategoryId),
   };
@@ -61,3 +61,4 @@ export async function isPlaceholderCatalogue(): Promise<boolean> {
 }
 
 export { productDisplayName } from "./format";
+

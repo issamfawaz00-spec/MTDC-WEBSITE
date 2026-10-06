@@ -87,6 +87,23 @@ availability, featured and channel types.
 - Remove `isPlaceholder: true` from entries as real data replaces them; the "Sample" labels and
   notices disappear automatically when no placeholders remain.
 
+### Working MTDC catalogue — 6 October 2026
+
+The sample catalogue has been replaced with 13 product entries from MTDC's supplied list:
+Zyn vegetable oil (25 kg), Zyn soya oil (25 kg, 1 L, 1.7 L, 5 L), rice (25 kg and 50 kg),
+Lamoure tomato paste (50 g, 210 g, 400 g, 2.2 kg), Rima markouk bread and shisha charcoal.
+
+- Category groupings and the four Home featured products are provisional for review.
+- Descriptions explicitly say **Draft description**. No ingredients, quality or exclusivity claims are inferred.
+- Rice and charcoal brands are unset. Missing brands show **To be confirmed** on product details,
+  and are not added to the brand strip.
+- The tomato-paste brand spelling **Lamoure** is preserved as supplied; confirm against packaging.
+- Bread types and charcoal types/sizes still need confirmation.
+- Every availability value remains `unconfirmed`; no stock quantities or prices are supplied.
+- Product images, brand logos, manufacturers, carton configurations and suitable channels await confirmation.
+- Oil bulk weights remain **25 kg**, not silently converted to litres.
+- Tobacco flavour entries are not included in this sales/enquiry catalogue.
+
 ### Enquiries
 
 Three forms share one component: **Request a Quote**, **General Enquiry** and **Brand Partnership**.

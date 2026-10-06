@@ -1,52 +1,49 @@
 import type { Category } from "@/lib/catalogue/types";
 
-/**
- * PLACEHOLDER categories. Replace with MTDC's approved category list.
- * `id` is used by products; `slug` appears in catalogue filter URLs.
- */
+/** Working categories for the product list supplied by MTDC on 6 October 2026. */
 export const categories: Category[] = [
   {
-    id: "category-a",
-    slug: "category-a",
-    name: "Sample Category A",
-    description: "Placeholder category. Replace with an approved MTDC product category.",
-    subcategories: [
-      { id: "category-a-1", name: "Subcategory A1" },
-      { id: "category-a-2", name: "Subcategory A2" },
-    ],
-    isPlaceholder: true,
+    "id": "cooking-oils",
+    "slug": "cooking-oils",
+    "name": "Cooking Oils",
+    "subcategories": [
+      {
+        "id": "vegetable-oil",
+        "name": "Vegetable Oil"
+      },
+      {
+        "id": "soya-oil",
+        "name": "Soya Oil"
+      }
+    ]
   },
   {
-    id: "category-b",
-    slug: "category-b",
-    name: "Sample Category B",
-    description: "Placeholder category. Replace with an approved MTDC product category.",
-    subcategories: [
-      { id: "category-b-1", name: "Subcategory B1" },
-      { id: "category-b-2", name: "Subcategory B2" },
-    ],
-    isPlaceholder: true,
+    "id": "rice-grains",
+    "slug": "rice-grains",
+    "name": "Rice & Grains",
+    "subcategories": []
   },
   {
-    id: "category-c",
-    slug: "category-c",
-    name: "Sample Category C",
-    description: "Placeholder category. Replace with an approved MTDC product category.",
-    subcategories: [
-      { id: "category-c-1", name: "Subcategory C1" },
-      { id: "category-c-2", name: "Subcategory C2" },
-    ],
-    isPlaceholder: true,
+    "id": "tomato-paste",
+    "slug": "tomato-paste",
+    "name": "Tomato Paste",
+    "subcategories": []
   },
   {
-    id: "category-d",
-    slug: "category-d",
-    name: "Sample Category D",
-    description: "Placeholder category. Replace with an approved MTDC product category.",
-    subcategories: [
-      { id: "category-d-1", name: "Subcategory D1" },
-      { id: "category-d-2", name: "Subcategory D2" },
-    ],
-    isPlaceholder: true,
+    "id": "bread-bakery",
+    "slug": "bread-bakery",
+    "name": "Bread & Bakery",
+    "subcategories": []
   },
+  {
+    "id": "shisha-accessories",
+    "slug": "shisha-accessories",
+    "name": "Shisha Accessories",
+    "subcategories": [
+      {
+        "id": "charcoal",
+        "name": "Charcoal"
+      }
+    ]
+  }
 ];

@@ -14,7 +14,7 @@ const { chromium } = require("playwright");
 const base = (process.env.BASE_URL || "http://localhost:3100").replace(/\/$/, "");
 const expectDelivery = process.env.EXPECT_DELIVERY === "1";
 const out = path.resolve(__dirname, "..", "screenshots");
-const pages = ["/", "/about", "/products", "/products/sample-product-01", "/services", "/partner", "/contact"];
+const pages = ["/", "/about", "/products", "/products/zyn-vegetable-oil-25kg", "/services", "/partner", "/contact"];
 const viewports = { phone: { width: 375, height: 812 }, desktop: { width: 1440, height: 900 } };
 const fail = [];
 const check = (cond, msg) => cond || fail.push(msg);
@@ -62,11 +62,11 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   const cards = () => page.locator("article").count();
   const total = await cards();
   check(total > 0, "products: cards rendered");
-  await page.locator("aside button", { hasText: "Sample Category B" }).click();
-  await page.waitForURL(/category=category-b/);
+  await page.locator("aside button", { hasText: "Cooking Oils" }).click();
+  await page.waitForURL(/category=cooking-oils/);
   check((await cards()) < total, "products: category filter narrows results");
-  await page.locator("aside button", { hasText: "Subcategory B2" }).click();
-  await page.waitForURL(/sub=category-b-2/);
+  await page.locator("aside button", { hasText: "Soya Oil" }).click();
+  await page.waitForURL(/sub=soya-oil/);
   await page.fill("#catalogue-search", "zzzz-no-match");
   check(await page.isVisible("text=No products match your search"), "products: empty state");
   await page.click("text=Clear filters");
@@ -76,10 +76,10 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
 
   // Search box follows the URL when navigation changes it (Codex finding 1)
   // Typed key by key so URL updates overlap with typing; no characters may be lost.
-  await page.locator("#catalogue-search").pressSequentially("Sample Product 05", { delay: 15 });
-  await page.waitForURL(/q=Sample\+Product\+05/);
+  await page.locator("#catalogue-search").pressSequentially("Vegetable Oil 25 kg", { delay: 15 });
+  await page.waitForURL(/q=Vegetable\+Oil\+25\+kg/);
   await page.waitForTimeout(300);
-  check((await page.inputValue("#catalogue-search")) === "Sample Product 05", "products: fast typing keeps every character");
+  check((await page.inputValue("#catalogue-search")) === "Vegetable Oil 25 kg", "products: fast typing keeps every character");
   check((await cards()) === 1, "products: search narrows results");
   await page.locator("header").getByRole("link", { name: "Products & Brands" }).click();
   await page.waitForURL((u) => !u.search);
@@ -87,9 +87,9 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   check((await page.inputValue("#catalogue-search")) === "", "products: search box cleared when URL has no query");
   check((await cards()) === total, "products: all products shown after navigating to /products");
   await page.goBack();
-  await page.waitForURL(/q=Sample/);
+  await page.waitForURL(/q=Vegetable/);
   await page.waitForTimeout(300);
-  check((await page.inputValue("#catalogue-search")) === "Sample Product 05", "products: search box restored on back navigation");
+  check((await page.inputValue("#catalogue-search")) === "Vegetable Oil 25 kg", "products: search box restored on back navigation");
 
   // Interrupted search update (Codex re-review of finding 1): a keystroke and a
   // header navigation happen in the same instant, so the navigation lands while
@@ -126,11 +126,11 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   check((await page.inputValue("#catalogue-search")) === "other", "products (interrupted): later URL change to ?q=other is followed");
 
   // Product page -> quote prefill
-  await page.goto(base + "/products/sample-product-01");
+  await page.goto(base + "/products/zyn-vegetable-oil-25kg");
   await page.locator("main").getByRole("link", { name: "Request a Quote" }).first().click();
-  await page.waitForURL(/contact\?type=quote&product=sample-product-01/);
+  await page.waitForURL(/contact\?type=quote&product=zyn-vegetable-oil-25kg/);
   const productValue = await page.locator('select[name="productSlug"]').inputValue();
-  check(productValue === "sample-product-01", "contact: product pre-selected from product page");
+  check(productValue === "zyn-vegetable-oil-25kg", "contact: product pre-selected from product page");
 
   // Validation
   await page.click('button[type="submit"]');

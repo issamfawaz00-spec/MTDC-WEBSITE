@@ -64,7 +64,8 @@ export interface Product {
   /** URL segment: /products/[slug]. Lowercase letters, numbers and dashes. */
   slug: string;
   name: string;
-  brandId: string;
+  /** Omit until MTDC confirms the brand; product details show To be confirmed. */
+  brandId?: string;
   manufacturer?: string;
   categoryId: string;
   subcategoryId?: string;
@@ -86,3 +87,4 @@ export interface ProductView extends Product {
   category: Category | undefined;
   subcategory: Subcategory | undefined;
 }
+

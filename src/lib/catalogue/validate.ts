@@ -48,7 +48,7 @@ export function validateCatalogue(data: { products: Product[]; brands: Brand[]; 
     const where = `Product "${p.id}"`;
     if (!p.name.trim()) errors.push(`${where}: name is required`);
     if (!SLUG.test(p.slug)) errors.push(`${where}: slug "${p.slug}" must be lowercase-with-dashes`);
-    if (!brandIds.has(p.brandId)) errors.push(`${where}: unknown brandId "${p.brandId}"`);
+    if (p.brandId && !brandIds.has(p.brandId)) errors.push(`${where}: unknown brandId "${p.brandId}"`);
     const category = categories.get(p.categoryId);
     if (!category) errors.push(`${where}: unknown categoryId "${p.categoryId}"`);
     else if (p.subcategoryId && !category.subcategories.some((s) => s.id === p.subcategoryId)) {
@@ -68,3 +68,4 @@ export function validateCatalogue(data: { products: Product[]; brands: Brand[]; 
     throw new Error(`Catalogue data has ${errors.length} problem(s):\n- ${errors.join("\n- ")}`);
   }
 }
+
