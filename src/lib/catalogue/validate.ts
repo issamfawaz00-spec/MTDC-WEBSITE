@@ -68,4 +68,3 @@ export function validateCatalogue(data: { products: Product[]; brands: Brand[]; 
     throw new Error(`Catalogue data has ${errors.length} problem(s):\n- ${errors.join("\n- ")}`);
   }
 }
-

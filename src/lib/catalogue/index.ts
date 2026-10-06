@@ -61,4 +61,3 @@ export async function isPlaceholderCatalogue(): Promise<boolean> {
 }
 
 export { productDisplayName } from "./format";
-

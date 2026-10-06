@@ -87,4 +87,3 @@ export interface ProductView extends Product {
   category: Category | undefined;
   subcategory: Subcategory | undefined;
 }
-
