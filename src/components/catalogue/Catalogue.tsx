@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Category, ProductView } from "@/lib/catalogue/types";
 import { Icon } from "@/components/ui/Icon";
 import { ProductGrid } from "./ProductCard";
@@ -20,7 +20,21 @@ export function Catalogue({ products, categories }: { products: ProductView[]; c
   const categoryParam = params.get("category");
   const activeCategory = categories.find((c) => c.slug === categoryParam);
   const activeSub = activeCategory?.subcategories.find((s) => s.id === params.get("sub"));
-  const [query, setQuery] = useState(params.get("q") ?? "");
+  const urlQuery = params.get("q") ?? "";
+  const [query, setQuery] = useState(urlQuery);
+  // The search box is local state (so typing stays smooth) but the URL is the
+  // source of truth. `pendingQuery` is the value we last wrote to the URL;
+  // until the URL catches up we ignore it, after that any other change
+  // (header link, back button, shared link) resets the box to match.
+  const pendingQuery = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (pendingQuery.current !== null) {
+      if (urlQuery === pendingQuery.current) pendingQuery.current = null;
+      return;
+    }
+    setQuery(urlQuery);
+  }, [urlQuery]);
 
   function update(next: { category?: string | null; sub?: string | null; q?: string | null }) {
     const sp = new URLSearchParams(params.toString());
@@ -31,6 +45,13 @@ export function Catalogue({ products, categories }: { products: ProductView[]; c
     }
     const qs = sp.toString();
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }
+
+  function search(value: string, extra: { category?: null; sub?: null } = {}) {
+    setQuery(value);
+    const q = value.trim();
+    if (q !== urlQuery) pendingQuery.current = q;
+    update({ ...extra, q: q || null });
   }
 
   const counts = useMemo(() => {
@@ -128,10 +149,7 @@ export function Catalogue({ products, categories }: { products: ProductView[]; c
               id="catalogue-search"
               type="search"
               value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                update({ q: e.target.value.trim() || null });
-              }}
+              onChange={(e) => search(e.target.value)}
               placeholder="Search by product, brand or category"
               autoComplete="off"
               className="field-input rounded-full pl-10"
@@ -198,10 +216,7 @@ export function Catalogue({ products, categories }: { products: ProductView[]; c
               <p className="mt-2 text-ink-500">Try another category or search term, or ask our team directly.</p>
               <button
                 type="button"
-                onClick={() => {
-                  setQuery("");
-                  update({ category: null, sub: null, q: null });
-                }}
+                onClick={() => search("", { category: null, sub: null })}
                 className="mt-6 text-sm font-semibold text-ink-900 underline underline-offset-4"
               >
                 Clear filters

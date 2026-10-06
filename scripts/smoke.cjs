@@ -71,6 +71,23 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   await page.waitForTimeout(300);
   check((await cards()) === total, "products: clear filters");
 
+  // Search box follows the URL when navigation changes it (Codex finding 1)
+  // Typed key by key so URL updates overlap with typing; no characters may be lost.
+  await page.locator("#catalogue-search").pressSequentially("Sample Product 05", { delay: 15 });
+  await page.waitForURL(/q=Sample\+Product\+05/);
+  await page.waitForTimeout(300);
+  check((await page.inputValue("#catalogue-search")) === "Sample Product 05", "products: fast typing keeps every character");
+  check((await cards()) === 1, "products: search narrows results");
+  await page.locator("header").getByRole("link", { name: "Products & Brands" }).click();
+  await page.waitForURL((u) => !u.search);
+  await page.waitForTimeout(300);
+  check((await page.inputValue("#catalogue-search")) === "", "products: search box cleared when URL has no query");
+  check((await cards()) === total, "products: all products shown after navigating to /products");
+  await page.goBack();
+  await page.waitForURL(/q=Sample/);
+  await page.waitForTimeout(300);
+  check((await page.inputValue("#catalogue-search")) === "Sample Product 05", "products: search box restored on back navigation");
+
   // Product page -> quote prefill
   await page.goto(base + "/products/sample-product-01");
   await page.locator("main").getByRole("link", { name: "Request a Quote" }).first().click();
