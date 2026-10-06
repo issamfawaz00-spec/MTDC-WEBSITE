@@ -4,7 +4,8 @@
  *   BASE_URL=http://localhost:3100 node scripts/smoke.cjs
  * Checks every page at phone and desktop widths for console errors and
  * horizontal overflow, exercises the catalogue filters and the enquiry forms,
- * and writes screenshots to ./screenshots (git-ignored).
+ * checks production security headers (CSP violations surface as console
+ * errors), and writes screenshots to ./screenshots (git-ignored).
  */
 const fs = require("fs");
 const path = require("path");
@@ -30,7 +31,9 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
       const errors = [];
       page.on("pageerror", (e) => errors.push(e.message));
       page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
-      await page.goto(base + p, { waitUntil: "networkidle" });
+      const response = await page.goto(base + p, { waitUntil: "networkidle" });
+      // Production security headers present; any CSP violation shows up as a console error above.
+      check(!!response.headers()["content-security-policy"], `${vp} ${p}: Content-Security-Policy header present`);
       check(!errors.length, `${vp} ${p}: console errors: ${errors.join(" | ")}`);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       check(overflow <= 0, `${vp} ${p}: horizontal overflow ${overflow}px`);
