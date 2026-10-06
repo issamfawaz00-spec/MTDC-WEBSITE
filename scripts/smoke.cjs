@@ -99,14 +99,22 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   await page.click('button[type="submit"]');
   check((await page.locator('[aria-invalid="true"]').count()) >= 4, "contact: validation errors shown");
 
+  // Browser applies the server's trimming before validating (Codex finding 3):
+  // spaces-only is rejected, a pasted email with surrounding spaces is accepted.
+  await page.fill('input[name="name"]', "   ");
+  await page.click('button[type="submit"]');
+  check((await page.getAttribute('input[name="name"]', "aria-invalid")) === "true", "contact: spaces-only name rejected in browser");
+
   // Valid submission
   await page.fill('input[name="name"]', "Smoke Test");
-  await page.fill('input[name="email"]', "smoke@example.com");
+  await page.fill('input[name="email"]', "  smoke@example.com  ");
   await page.fill('input[name="phone"]', "+234 800 000 0000");
   await page.selectOption('select[name="businessType"]', "Retailer");
   await page.fill('textarea[name="message"]', "Automated smoke test enquiry.");
   await page.check('input[name="consent"]');
   await page.click('button[type="submit"]');
+  await page.waitForTimeout(300);
+  check((await page.getAttribute('input[name="email"]', "aria-invalid")) !== "true", "contact: email with surrounding spaces accepted");
   if (expectDelivery) {
     await page
       .waitForSelector("text=Your enquiry has been sent", { timeout: 10000 })

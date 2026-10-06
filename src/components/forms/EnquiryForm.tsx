@@ -6,6 +6,7 @@ import {
   BUSINESS_TYPES,
   PARTNER_TYPES,
   emptyEnquiry,
+  normaliseEnquiry,
   requiredFields,
   validateEnquiry,
   type EnquiryErrors,
@@ -67,7 +68,11 @@ export function EnquiryForm({
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const errs = validateEnquiry(values);
+    // Apply exactly the server's normalisation (trimming etc.) before validating
+    // and sending, so the browser and the API always agree.
+    const input = normaliseEnquiry(values) ?? values;
+    setValues(input);
+    const errs = validateEnquiry(input);
     setErrors(errs);
     if (Object.keys(errs).length) {
       setStatus({ kind: "idle" });
@@ -80,7 +85,7 @@ export function EnquiryForm({
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify(input),
       });
       const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string; fields?: EnquiryErrors } | null;
 
