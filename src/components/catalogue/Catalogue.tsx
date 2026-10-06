@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import type { Category, ProductView } from "@/lib/catalogue/types";
 import { Icon } from "@/components/ui/Icon";
+import { normaliseForSearch } from "@/lib/catalogue/format";
 import { ProductGrid } from "./ProductCard";
 
 const ALL = "all";
@@ -64,14 +65,14 @@ export function Catalogue({ products, categories }: { products: ProductView[]; c
   }, [products]);
 
   const visible = useMemo(() => {
-    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+    const terms = normaliseForSearch(query).split(/\s+/).filter(Boolean);
     return products.filter((p) => {
       if (activeCategory && p.categoryId !== activeCategory.id) return false;
       if (activeSub && p.subcategoryId !== activeSub.id) return false;
       if (!terms.length) return true;
-      const haystack = [p.name, p.brand?.name, p.manufacturer, p.category?.name, p.subcategory?.name, p.packSize, p.description]
-        .join(" ")
-        .toLowerCase();
+      const haystack = normaliseForSearch(
+        [p.name, p.brand?.name, p.manufacturer, p.category?.name, p.subcategory?.name, p.packSize, p.description].join(" "),
+      );
       return terms.every((t) => haystack.includes(t));
     });
   }, [products, activeCategory, activeSub, query]);

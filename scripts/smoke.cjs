@@ -98,6 +98,15 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   await page.waitForTimeout(300);
   check((await cards()) === total, "products: clear filters");
 
+  // Straight and curly apostrophes match the same products (L'Amore / L’Amore)
+  for (const q of ["L'Amore", "L’Amore", "l'amore tomato"]) {
+    await page.fill("#catalogue-search", q);
+    await page.waitForTimeout(300);
+    check((await cards()) === 4, `products: search "${q}" finds the 4 L’Amore products (got ${await cards()})`);
+  }
+  await page.fill("#catalogue-search", "");
+  await page.waitForTimeout(300);
+
   // Search box follows the URL when navigation changes it (Codex finding 1)
   // Typed key by key so URL updates overlap with typing; no characters may be lost.
   await page.locator("#catalogue-search").pressSequentially("Vegetable Oil 25 kg", { delay: 15 });

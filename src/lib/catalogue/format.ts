@@ -17,3 +17,14 @@ export function truncateAtWord(text: string, max = 160): string {
   const lastSpace = cut.lastIndexOf(" ");
   return `${(lastSpace > 0 ? cut.slice(0, lastSpace) : cut).replace(/[\s,;:.]+$/, "")}…`;
 }
+
+/** Apostrophe-like characters people may type or that appear in names: ‘ ’ ‛ ʼ ′ ` ´ */
+const APOSTROPHES = /[‘’‛ʼ′`´]/g;
+
+/**
+ * Normalises text for catalogue search: lower case, and every apostrophe
+ * variant treated as a plain ' so "L'Amore" and "L’Amore" match each other.
+ */
+export function normaliseForSearch(text: string): string {
+  return text.toLowerCase().replace(APOSTROPHES, "'");
+}
