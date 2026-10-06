@@ -57,6 +57,16 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   const ctx = await browser.newContext({ viewport: viewports.desktop, reducedMotion: "reduce" });
   const page = await ctx.newPage();
 
+  // Featured product cards line up even when a brand is not confirmed yet
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const nameTops = await page
+    .locator("article h3")
+    .evaluateAll((els) => els.slice(0, 4).map((e) => Math.round(e.getBoundingClientRect().top)));
+  check(
+    nameTops.length === 4 && Math.max(...nameTops) - Math.min(...nameTops) <= 1,
+    `home: featured product names aligned (${nameTops.join(",")})`,
+  );
+
   // Catalogue
   await page.goto(base + "/products");
   const cards = () => page.locator("article").count();

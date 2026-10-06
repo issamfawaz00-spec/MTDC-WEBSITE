@@ -110,7 +110,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                 </PlaceholderNotice>
               </div>
             )}
-            <p className="text-xs font-semibold tracking-[0.16em] text-ink-500 uppercase">{product.brand?.name}</p>
+            <p className={`text-xs font-semibold tracking-[0.16em] uppercase ${product.brand ? "text-ink-500" : "text-ink-400"}`}>
+              {product.brand?.name ?? "Brand to be confirmed"}
+            </p>
             <h1 className="mt-3 text-[2.2rem] leading-[1.08] font-semibold tracking-[-0.03em] sm:text-[2.8rem]">{product.name}</h1>
             <div className="mt-4">
               <AvailabilityBadge availability={product.availability} />

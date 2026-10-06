@@ -27,7 +27,10 @@ export function ProductCard({ product, priority }: { product: ProductView; prior
       </div>
 
       <div className="mt-4 flex flex-1 flex-col">
-        <p className="text-[0.72rem] font-semibold tracking-[0.12em] text-ink-500 uppercase">{product.brand?.name}</p>
+        {/* Always one brand line, so cards stay aligned when a brand is not confirmed yet. */}
+        <p className={`text-[0.72rem] font-semibold tracking-[0.12em] uppercase ${product.brand ? "text-ink-500" : "text-ink-400"}`}>
+          {product.brand?.name ?? "Brand to be confirmed"}
+        </p>
         <h3 className="mt-1.5 text-[1.02rem] leading-snug font-semibold text-ink-900">
           <Link href={`/products/${product.slug}`} className="after:absolute after:inset-0 after:content-['']">
             {product.name}
