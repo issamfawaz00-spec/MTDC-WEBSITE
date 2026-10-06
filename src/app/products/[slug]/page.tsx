@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProducts, getRelatedProducts, productDisplayName } from "@/lib/catalogue";
+import { truncateAtWord } from "@/lib/catalogue/format";
 import { availabilityLabels, channelLabels } from "@/lib/catalogue/labels";
 import { AvailabilityBadge } from "@/components/catalogue/AvailabilityBadge";
 import { ProductGrid, quoteHref } from "@/components/catalogue/ProductCard";
@@ -23,7 +24,8 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
   const product = await getProductBySlug(slug);
   if (!product) return {};
   const title = productDisplayName(product);
-  const description = [product.description, product.packSize].filter(Boolean).join(" ").slice(0, 160);
+  // Description alone (it already states the pack size), shortened at a word boundary.
+  const description = truncateAtWord(product.description, 160);
   const image = product.images[0];
   return {
     title,

@@ -149,6 +149,15 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   await page.waitForTimeout(500);
   check((await page.inputValue("#catalogue-search")) === "other", "products (interrupted): later URL change to ?q=other is followed");
 
+  // Meta description: the page's own description, never cut mid-word
+  for (const slug of ["zyn-soya-oil-1-7l", "rice-50kg"]) {
+    await page.goto(base + "/products/" + slug);
+    const meta = await page.getAttribute('meta[name="description"]', "content");
+    const shown = (await page.locator("main p.text-lg").first().textContent()).trim();
+    const ok = meta.length <= 160 && (meta === shown || (meta.endsWith("…") && (shown + " ").startsWith(meta.slice(0, -1) + " ")));
+    check(ok, `product ${slug}: meta description matches the page and ends on a whole word ("${meta}")`);
+  }
+
   // Product page -> quote prefill
   await page.goto(base + "/products/zyn-vegetable-oil-25kg");
   await page.locator("main").getByRole("link", { name: "Request a Quote" }).first().click();
