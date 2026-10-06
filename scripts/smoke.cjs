@@ -102,7 +102,12 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   // Browser applies the server's trimming before validating (Codex finding 3):
   // spaces-only is rejected, a pasted email with surrounding spaces is accepted.
   await page.fill('input[name="name"]', "   ");
+  await page.fill('input[name="phone"]', "-------");
   await page.click('button[type="submit"]');
+  check(
+    (await page.getAttribute('input[name="phone"]', "aria-invalid")) === "true",
+    "contact: punctuation-only phone rejected (finding 4)",
+  );
   check((await page.getAttribute('input[name="name"]', "aria-invalid")) === "true", "contact: spaces-only name rejected in browser");
 
   // Valid submission

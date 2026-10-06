@@ -79,7 +79,19 @@ const LIMITS: Partial<Record<EnquiryField, number>> = {
 };
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const PHONE = /^[+()\d\s-]{7,}$/;
+/** Optional leading "+", then digits with common separators: spaces, dashes, dots, brackets. */
+const PHONE_CHARS = /^\+?[\d\s().-]+$/;
+
+/**
+ * Accepts local (e.g. 0803 123 4567) and international (e.g. +234 803 123 4567)
+ * formats. Requires 7 to 15 digits (15 is the international maximum), so
+ * punctuation alone such as "-------" is rejected.
+ */
+export function isValidPhone(value: string): boolean {
+  if (!PHONE_CHARS.test(value)) return false;
+  const digits = value.replace(/\D/g, "").length;
+  return digits >= 7 && digits <= 15;
+}
 
 /** Fields shown and required for each enquiry type. */
 export const requiredFields: Record<EnquiryType, EnquiryField[]> = {
@@ -128,7 +140,7 @@ export function validateEnquiry(input: EnquiryInput): EnquiryErrors {
     }
   }
   if (input.email && !EMAIL.test(input.email)) errors.email = "Please enter a valid email address.";
-  if (input.phone && !PHONE.test(input.phone)) errors.phone = "Please enter a valid phone number.";
+  if (input.phone && !isValidPhone(input.phone)) errors.phone = "Please enter a valid phone number.";
   if (input.message && input.message.length < 10 && !errors.message) errors.message = "Please add a little more detail.";
   if (input.businessType && !(BUSINESS_TYPES as readonly string[]).includes(input.businessType))
     errors.businessType = "Please choose an option.";
