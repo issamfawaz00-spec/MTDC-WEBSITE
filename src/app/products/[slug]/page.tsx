@@ -88,13 +88,13 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
           {/* Gallery */}
           <div className="lg:col-span-6">
             <div className="relative aspect-square overflow-hidden rounded-2xl bg-canvas ring-1 ring-line lg:sticky lg:top-28">
-              <ProductMedia image={product.images[0]} seed={product.slug} sizes="(min-width: 1024px) 560px, 100vw" priority size="lg" />
+              <ProductMedia image={product.images[0]} sizes="(min-width: 1024px) 560px, 100vw" priority size="lg" />
             </div>
             {product.images.length > 1 && (
               <ul className="mt-4 grid grid-cols-4 gap-3">
                 {product.images.slice(1, 5).map((img) => (
                   <li key={img.src} className="relative aspect-square overflow-hidden rounded-xl bg-canvas ring-1 ring-line">
-                    <ProductMedia image={img} seed={img.src} sizes="120px" />
+                    <ProductMedia image={img} sizes="120px" />
                   </li>
                 ))}
               </ul>

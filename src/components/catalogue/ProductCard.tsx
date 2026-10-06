@@ -13,12 +13,7 @@ export function ProductCard({ product, priority }: { product: ProductView; prior
   return (
     <article className="group relative flex flex-col">
       <div className="relative aspect-[4/5] overflow-hidden rounded-card bg-canvas ring-1 ring-line transition-shadow duration-300 group-hover:shadow-[0_18px_40px_-24px_rgba(6,18,26,0.35)]">
-        <ProductMedia
-          image={product.images[0]}
-          seed={product.slug}
-          sizes="(min-width: 1280px) 290px, (min-width: 768px) 33vw, 50vw"
-          priority={priority}
-        />
+        <ProductMedia image={product.images[0]} sizes="(min-width: 1280px) 290px, (min-width: 768px) 33vw, 50vw" priority={priority} />
         {product.isPlaceholder && (
           <span className="absolute top-3 left-3 rounded-full border border-amber-line bg-amber-tint/95 px-2.5 py-0.5 text-[0.65rem] font-semibold tracking-[0.08em] text-amber-ink uppercase">
             Sample

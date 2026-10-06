@@ -91,7 +91,7 @@ export default async function HomePage() {
                   className={`group relative overflow-hidden rounded-2xl bg-white ring-1 ring-line ${i === 0 ? "row-span-2 aspect-[4/7]" : "aspect-square"}`}
                   aria-label={`View ${p.name}`}
                 >
-                  <ProductMedia image={p.images[0]} seed={p.slug} sizes="(min-width: 1024px) 240px, 45vw" priority caption={false} />
+                  <ProductMedia image={p.images[0]} sizes="(min-width: 1024px) 240px, 45vw" priority caption={false} tone="white" />
                 </Link>
               ))}
             </div>
