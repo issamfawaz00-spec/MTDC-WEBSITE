@@ -1,13 +1,14 @@
 import type { Product } from "@/lib/catalogue/types";
 
-/** MTDC product list supplied on 6 October 2026. Descriptions are drafts. Sizes are preserved as supplied; no stock, manufacturer, carton, channel or ingredient claims are inferred. Rice and charcoal brands are intentionally unset. The four featured entries are a provisional display selection. Photos await approved assets. */
+/** MTDC product list supplied on 6 October 2026. Descriptions approved by MTDC on 6 October 2026. Sizes are preserved as supplied; no stock, manufacturer, carton, channel or ingredient claims are inferred. Rice and charcoal brands are intentionally unset. The four featured entries are a provisional display selection. Photos await approved assets. */
 export const products: Product[] = [
   {
     id: "zyn-vegetable-oil-25kg",
     slug: "zyn-vegetable-oil-25kg",
     name: "Vegetable Oil 25 kg",
     categoryId: "cooking-oils",
-    description: "Draft description: Vegetable Oil 25 kg. Carton configuration and availability are to be confirmed.",
+    description:
+      "Zyn vegetable oil in a 25 kg pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: true,
@@ -21,7 +22,8 @@ export const products: Product[] = [
     slug: "zyn-soya-oil-25kg",
     name: "Soya Oil 25 kg",
     categoryId: "cooking-oils",
-    description: "Draft description: Soya Oil 25 kg. Carton configuration and availability are to be confirmed.",
+    description:
+      "Zyn soya oil in a 25 kg pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: false,
@@ -35,7 +37,8 @@ export const products: Product[] = [
     slug: "zyn-soya-oil-1l",
     name: "Soya Oil 1 L",
     categoryId: "cooking-oils",
-    description: "Draft description: Soya Oil 1 L. Carton configuration and availability are to be confirmed.",
+    description:
+      "Zyn soya oil in a 1 L pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: true,
@@ -49,7 +52,8 @@ export const products: Product[] = [
     slug: "zyn-soya-oil-1-7l",
     name: "Soya Oil 1.7 L",
     categoryId: "cooking-oils",
-    description: "Draft description: Soya Oil 1.7 L. Carton configuration and availability are to be confirmed.",
+    description:
+      "Zyn soya oil in a 1.7 L pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: false,
@@ -63,7 +67,8 @@ export const products: Product[] = [
     slug: "zyn-soya-oil-5l",
     name: "Soya Oil 5 L",
     categoryId: "cooking-oils",
-    description: "Draft description: Soya Oil 5 L. Carton configuration and availability are to be confirmed.",
+    description:
+      "Zyn soya oil in a 5 L pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: false,
@@ -78,7 +83,7 @@ export const products: Product[] = [
     name: "Rice 25 kg",
     categoryId: "rice-grains",
     description:
-      "Draft description: Rice 25 kg. Brand and rice variety are to be confirmed. Carton configuration and availability are to be confirmed.",
+      "Rice in a 25 kg pack size, supplied by MTDC to trade buyers in Abuja / FCT. Brand and variety are to be confirmed; ask our team for current details when you request a quote.",
     images: [],
     availability: "unconfirmed",
     featured: false,
@@ -91,7 +96,7 @@ export const products: Product[] = [
     name: "Rice 50 kg",
     categoryId: "rice-grains",
     description:
-      "Draft description: Rice 50 kg. Brand and rice variety are to be confirmed. Carton configuration and availability are to be confirmed.",
+      "Rice in a 50 kg pack size, supplied by MTDC to trade buyers in Abuja / FCT. Brand and variety are to be confirmed; ask our team for current details when you request a quote.",
     images: [],
     availability: "unconfirmed",
     featured: true,
@@ -104,7 +109,7 @@ export const products: Product[] = [
     name: "Tomato Paste 50 g",
     categoryId: "tomato-paste",
     description:
-      "Draft description: Tomato Paste 50 g. Brand spelling is supplied by MTDC and awaits packaging confirmation. Carton configuration and availability are to be confirmed.",
+      "Lamoure tomato paste in a 50 g pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: false,
@@ -118,7 +123,7 @@ export const products: Product[] = [
     name: "Tomato Paste 210 g",
     categoryId: "tomato-paste",
     description:
-      "Draft description: Tomato Paste 210 g. Brand spelling is supplied by MTDC and awaits packaging confirmation. Carton configuration and availability are to be confirmed.",
+      "Lamoure tomato paste in a 210 g pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: false,
@@ -132,7 +137,7 @@ export const products: Product[] = [
     name: "Tomato Paste 400 g",
     categoryId: "tomato-paste",
     description:
-      "Draft description: Tomato Paste 400 g. Brand spelling is supplied by MTDC and awaits packaging confirmation. Carton configuration and availability are to be confirmed.",
+      "Lamoure tomato paste in a 400 g pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: true,
@@ -146,7 +151,7 @@ export const products: Product[] = [
     name: "Tomato Paste 2.2 kg",
     categoryId: "tomato-paste",
     description:
-      "Draft description: Tomato Paste 2.2 kg. Brand spelling is supplied by MTDC and awaits packaging confirmation. Carton configuration and availability are to be confirmed.",
+      "Lamoure tomato paste in a 2.2 kg pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: false,
@@ -160,7 +165,7 @@ export const products: Product[] = [
     name: "Markouk Bread",
     categoryId: "bread-bakery",
     description:
-      "Draft description: Markouk Bread. Different types are supplied; type names and pack sizes are to be confirmed. Carton configuration and availability are to be confirmed.",
+      "Rima markouk bread, available from MTDC in different types for trade buyers in Abuja / FCT. Types and pack sizes are to be confirmed; tell us which type you need when you request a quote.",
     images: [],
     availability: "unconfirmed",
     featured: false,
@@ -173,7 +178,7 @@ export const products: Product[] = [
     name: "Shisha Charcoal",
     categoryId: "charcoal",
     description:
-      "Draft description: Shisha Charcoal. Brand, charcoal type and pack sizes are to be confirmed. Carton configuration and availability are to be confirmed.",
+      "Charcoal supplied by MTDC to trade buyers in Abuja / FCT. Brand, type and pack sizes are to be confirmed; ask our team for current details when you request a quote.",
     images: [],
     availability: "unconfirmed",
     featured: false,
