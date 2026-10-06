@@ -90,10 +90,10 @@ availability, featured and channel types.
 ### Working MTDC catalogue — 6 October 2026
 
 The sample catalogue has been replaced with 13 product entries from MTDC's supplied list:
-Zyn vegetable oil (25 kg), Zyn soya oil (25 kg, 1 L, 1.7 L, 5 L), rice (25 kg and 50 kg),
+Zyn soya oil (25 kg, 5 L, 3 L, 1.7 L), Crystal vegetable oil (25 kg), rice (25 kg and 50 kg),
 L’Amore Tomato Mix (50 g, 210 g, 400 g, 2.2 kg), Rima markouk bread and shisha charcoal.
 
-- Category groupings and the four Home featured products are provisional for review.
+- The oil range was confirmed by MTDC on 6 October 2026. The four Home featured products were chosen by MTDC.
 - Descriptions were approved by MTDC on 6 October 2026. They use only confirmed brands, names and sizes:
   no ingredients, quality, origin, availability or packaging claims.
 - Rice and charcoal brands are unset. Missing brands show **To be confirmed** on product details,

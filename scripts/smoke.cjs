@@ -14,7 +14,7 @@ const { chromium } = require("playwright");
 const base = (process.env.BASE_URL || "http://localhost:3100").replace(/\/$/, "");
 const expectDelivery = process.env.EXPECT_DELIVERY === "1";
 const out = path.resolve(__dirname, "..", "screenshots");
-const pages = ["/", "/about", "/products", "/products/zyn-vegetable-oil-25kg", "/services", "/partner", "/contact"];
+const pages = ["/", "/about", "/products", "/products/crystal-vegetable-oil-25kg", "/services", "/partner", "/contact"];
 const viewports = { phone: { width: 375, height: 812 }, desktop: { width: 1440, height: 900 } };
 const fail = [];
 const check = (cond, msg) => cond || fail.push(msg);
@@ -168,11 +168,11 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   }
 
   // Product page -> quote prefill
-  await page.goto(base + "/products/zyn-vegetable-oil-25kg");
+  await page.goto(base + "/products/crystal-vegetable-oil-25kg");
   await page.locator("main").getByRole("link", { name: "Request a Quote" }).first().click();
-  await page.waitForURL(/contact\?type=quote&product=zyn-vegetable-oil-25kg/);
+  await page.waitForURL(/contact\?type=quote&product=crystal-vegetable-oil-25kg/);
   const productValue = await page.locator('select[name="productSlug"]').inputValue();
-  check(productValue === "zyn-vegetable-oil-25kg", "contact: product pre-selected from product page");
+  check(productValue === "crystal-vegetable-oil-25kg", "contact: product pre-selected from product page");
 
   // Generic 'full range' line on the Contact page
   check(await page.isVisible("text=Looking for something not listed? Ask us about our full range."), "contact: full-range line shown");

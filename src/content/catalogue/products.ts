@@ -1,20 +1,20 @@
 import type { Product } from "@/lib/catalogue/types";
 
-/** MTDC product list supplied on 6 October 2026. Descriptions approved by MTDC on 6 October 2026. Sizes are preserved as supplied; no stock, manufacturer, carton, channel or ingredient claims are inferred. Rice and charcoal brands are intentionally unset. The four featured entries are a provisional display selection. Photos await approved assets. */
+/** MTDC product list supplied on 6 October 2026. Descriptions approved by MTDC on 6 October 2026. Sizes are preserved as supplied; no stock, manufacturer, carton, channel or ingredient claims are inferred. Rice and charcoal brands are intentionally unset. Oil range confirmed by MTDC on 6 October 2026. Featured entries chosen by MTDC. Photos await approved assets. */
 export const products: Product[] = [
   {
-    id: "zyn-vegetable-oil-25kg",
-    slug: "zyn-vegetable-oil-25kg",
+    id: "crystal-vegetable-oil-25kg",
+    slug: "crystal-vegetable-oil-25kg",
     name: "Vegetable Oil 25 kg",
     categoryId: "cooking-oils",
     description:
-      "Zyn vegetable oil in a 25 kg pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
+      "Crystal vegetable oil in a 25 kg pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
     featured: true,
     channels: [],
     packSize: "25 kg",
-    brandId: "zyn",
+    brandId: "crystal",
     subcategoryId: "vegetable-oil",
   },
   {
@@ -26,24 +26,24 @@ export const products: Product[] = [
       "Zyn soya oil in a 25 kg pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
-    featured: false,
+    featured: true,
     channels: [],
     packSize: "25 kg",
     brandId: "zyn",
     subcategoryId: "soya-oil",
   },
   {
-    id: "zyn-soya-oil-1l",
-    slug: "zyn-soya-oil-1l",
-    name: "Soya Oil 1 L",
+    id: "zyn-soya-oil-3l",
+    slug: "zyn-soya-oil-3l",
+    name: "Soya Oil 3 L",
     categoryId: "cooking-oils",
     description:
-      "Zyn soya oil in a 1 L pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
+      "Zyn soya oil in a 3 L pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
     availability: "unconfirmed",
-    featured: true,
+    featured: false,
     channels: [],
-    packSize: "1 L",
+    packSize: "3 L",
     brandId: "zyn",
     subcategoryId: "soya-oil",
   },
