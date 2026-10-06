@@ -100,6 +100,31 @@ The browser and the server apply the same validation (`src/lib/enquiry/schema.ts
   details stay in the form.
 - To configure locally, copy `.env.example` to `.env.local` and fill it in. Never commit `.env*` files.
 
+#### Required before public enquiry delivery: rate limiting
+
+`/api/enquiry` has no rate limiting yet. **Do not set `ENQUIRY_WEBHOOK_URL` on the public site until
+rate limiting is in place.** Requirements (agreed in review):
+
+- Choose the counter store once hosting is decided. In-memory counters only work for a single running
+  process; multiple processes or serverless instances need a shared store (e.g. Redis).
+- Identify visitors from information supplied by the trusted hosting platform or proxy. Do not trust a
+  raw incoming `X-Forwarded-For` header, which visitors can forge.
+- Check the limit **before** an enquiry is forwarded to the webhook.
+- Over the limit, respond `429 Too Many Requests` with a `Retry-After` header; the form must say the
+  enquiry was not sent.
+- Remove expired counters so memory or storage does not grow without bound.
+
+### Security headers
+
+Production builds (`npm run build` / `npm start`) send a Content-Security-Policy, HSTS
+(`max-age=63072000`, no `includeSubDomains` yet), `X-Content-Type-Options`, `X-Frame-Options`,
+`Referrer-Policy` and `Permissions-Policy`; see `next.config.ts`. `next dev` sends none of them.
+
+- The CSP only allows the site's own resources. **Adding any third-party service** (maps, analytics,
+  chat, embedded video, external images) requires extending the policy, or it will be blocked.
+- Add `includeSubDomains` to HSTS only once HTTPS is confirmed for every subdomain.
+- Before launch, test the production policy on the real domain over HTTPS.
+
 ### Contact details
 
 Set approved details in `src/config/site.ts` (`contact`). Empty values show "To be confirmed" and are never linked.
