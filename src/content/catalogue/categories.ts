@@ -36,14 +36,9 @@ export const categories: Category[] = [
     subcategories: [],
   },
   {
-    id: "shisha-accessories",
-    slug: "shisha-accessories",
-    name: "Shisha Accessories",
-    subcategories: [
-      {
-        id: "charcoal",
-        name: "Charcoal",
-      },
-    ],
+    id: "charcoal",
+    slug: "charcoal",
+    name: "Charcoal",
+    subcategories: [],
   },
 ];

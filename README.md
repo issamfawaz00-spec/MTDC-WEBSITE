@@ -103,6 +103,8 @@ Lamoure tomato paste (50 g, 210 g, 400 g, 2.2 kg), Rima markouk bread and shisha
 - Product images, brand logos, manufacturers, carton configurations and suitable channels await confirmation.
 - Oil bulk weights remain **25 kg**, not silently converted to litres.
 - Tobacco flavour entries are not included in this sales/enquiry catalogue.
+- Charcoal is listed under a **Charcoal** category (renamed from "Shisha Accessories" by owner decision);
+  the product name is kept as supplied.
 
 ### Enquiries
 

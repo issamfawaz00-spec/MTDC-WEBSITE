@@ -171,13 +171,12 @@ export const products: Product[] = [
     id: "shisha-charcoal",
     slug: "shisha-charcoal",
     name: "Shisha Charcoal",
-    categoryId: "shisha-accessories",
+    categoryId: "charcoal",
     description:
       "Draft description: Shisha Charcoal. Brand, charcoal type and pack sizes are to be confirmed. Carton configuration and availability are to be confirmed.",
     images: [],
     availability: "unconfirmed",
     featured: false,
     channels: [],
-    subcategoryId: "charcoal",
   },
 ];
