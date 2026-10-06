@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import type { Category, ProductView } from "@/lib/catalogue/types";
 import { Icon } from "@/components/ui/Icon";
 import { ProductGrid } from "./ProductCard";
@@ -13,45 +13,45 @@ const ALL = "all";
  * Filter state lives in the URL (?category=&sub=&q=) so views can be shared.
  */
 export function Catalogue({ products, categories }: { products: ProductView[]; categories: Category[] }) {
-  const router = useRouter();
-  const pathname = usePathname();
   const params = useSearchParams();
 
   const categoryParam = params.get("category");
   const activeCategory = categories.find((c) => c.slug === categoryParam);
   const activeSub = activeCategory?.subcategories.find((s) => s.id === params.get("sub"));
   const urlQuery = params.get("q") ?? "";
+  // The search box is local state so typing stays smooth; the URL is the
+  // source of truth. Filter changes are written with the native History API,
+  // which updates the address bar immediately (Next.js keeps useSearchParams
+  // in sync), so there is never a pending update to go stale. Whenever the
+  // URL changes, from typing, a link, Back/Forward or a shared URL, the box
+  // adopts the address bar's actual query unless it already matches.
   const [query, setQuery] = useState(urlQuery);
-  // The search box is local state (so typing stays smooth) but the URL is the
-  // source of truth. `pendingQuery` is the value we last wrote to the URL;
-  // until the URL catches up we ignore it, after that any other change
-  // (header link, back button, shared link) resets the box to match.
-  const pendingQuery = useRef<string | null>(null);
 
   useEffect(() => {
-    if (pendingQuery.current !== null) {
-      if (urlQuery === pendingQuery.current) pendingQuery.current = null;
-      return;
-    }
-    setQuery(urlQuery);
-  }, [urlQuery]);
+    // Reads the address bar (outside React), which render code cannot do; an
+    // effect is the intended place to sync with such an external system.
+    const live = new URLSearchParams(window.location.search).get("q") ?? "";
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from the address bar, see above
+    setQuery((current) => (current.trim() === live ? current : live));
+    // Runs on every URL change (new params object), not only when ?q= differs
+    // from the last render, so no navigation can be missed.
+  }, [params]);
 
   function update(next: { category?: string | null; sub?: string | null; q?: string | null }) {
-    const sp = new URLSearchParams(params.toString());
+    // Build on the live address bar, not a possibly older render's params.
+    const sp = new URLSearchParams(window.location.search);
     for (const [key, value] of Object.entries(next)) {
       if (value === undefined) continue;
       if (value === null || value === "" || value === ALL) sp.delete(key);
       else sp.set(key, value);
     }
     const qs = sp.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    window.history.replaceState(null, "", qs ? `${window.location.pathname}?${qs}` : window.location.pathname);
   }
 
   function search(value: string, extra: { category?: null; sub?: null } = {}) {
     setQuery(value);
-    const q = value.trim();
-    if (q !== urlQuery) pendingQuery.current = q;
-    update({ ...extra, q: q || null });
+    update({ ...extra, q: value.trim() || null });
   }
 
   const counts = useMemo(() => {

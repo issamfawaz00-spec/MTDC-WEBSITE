@@ -91,6 +91,40 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   await page.waitForTimeout(300);
   check((await page.inputValue("#catalogue-search")) === "Sample Product 05", "products: search box restored on back navigation");
 
+  // Interrupted search update (Codex re-review of finding 1): a keystroke and a
+  // header navigation happen in the same instant, so the navigation lands while
+  // the search update is still in flight. The box must follow the final URL,
+  // and later URL changes must still be followed.
+  await page.goto(base + "/products?q=abc", { waitUntil: "networkidle" });
+  await page.evaluate(() => {
+    const input = document.querySelector("#catalogue-search");
+    const setValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
+    setValue.call(input, "abcd");
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    document.querySelector('header a[href="/products"]').click();
+  });
+  await page.waitForTimeout(1000);
+  check(new URL(page.url()).search === "", `products (interrupted): URL has no query (got ${page.url()})`);
+  check((await page.inputValue("#catalogue-search")) === "", "products (interrupted): box cleared after navigating away mid-update");
+  check((await cards()) === total, "products (interrupted): all products shown");
+  // Same instant again, but navigating Back to a URL whose query equals the old one.
+  await page.goto(base + "/products?q=abc", { waitUntil: "networkidle" });
+  await page.locator("header").getByRole("link", { name: "Products & Brands" }).click();
+  await page.waitForURL((u) => !u.search);
+  await page.evaluate(() => {
+    const input = document.querySelector("#catalogue-search");
+    const setValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
+    setValue.call(input, "zz");
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    window.history.back();
+  });
+  await page.waitForTimeout(1000);
+  check(new URL(page.url()).searchParams.get("q") === "abc", `products (back mid-update): URL back at ?q=abc (got ${page.url()})`);
+  check((await page.inputValue("#catalogue-search")) === "abc", "products (back mid-update): box matches URL");
+  await page.evaluate(() => window.history.pushState(null, "", "/products?q=other"));
+  await page.waitForTimeout(500);
+  check((await page.inputValue("#catalogue-search")) === "other", "products (interrupted): later URL change to ?q=other is followed");
+
   // Product page -> quote prefill
   await page.goto(base + "/products/sample-product-01");
   await page.locator("main").getByRole("link", { name: "Request a Quote" }).first().click();
