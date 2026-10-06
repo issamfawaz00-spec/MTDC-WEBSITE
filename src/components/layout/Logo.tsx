@@ -1,26 +1,52 @@
+import Image from "next/image";
 import Link from "next/link";
+import logo from "../../../public/images/brand/mtdc-logo.webp";
 
-export function LogoMark({ className = "size-9" }: { className?: string }) {
+/**
+ * MTDC logo, used exactly as supplied (public/images/brand/mtdc-logo.webp,
+ * 2000 x 667, transparent background). The file has transparent margins
+ * around the lettering (about 13.2% left/right, 27% top/bottom); negative
+ * margins cancel them so the letters align with the page edge.
+ *
+ * The lettering is dark navy, so on dark backgrounds (`tone="light"`) the
+ * logo sits on a white panel rather than being recoloured.
+ */
+function LogoImage({ width, priority }: { width: number; priority?: boolean }) {
+  const height = Math.round((width * logo.height) / logo.width);
+  const marginX = Math.round(width * 0.132);
+  const marginY = Math.round(height * 0.268);
   return (
-    <svg viewBox="0 0 40 40" className={className} aria-hidden="true" focusable="false">
-      <rect width="40" height="40" rx="10" fill="#0a1b25" />
-      <path d="M10 28l7-7 5 4 8-11" fill="none" stroke="#6fd3cc" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M24.5 13.5H30V19" fill="none" stroke="#6fd3cc" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="10" cy="28" r="2.4" fill="#fff" />
-    </svg>
+    <Image
+      src={logo}
+      alt="MTDC"
+      width={width}
+      height={height}
+      priority={priority}
+      style={{ margin: `-${marginY}px -${marginX}px` }}
+      className="max-w-none"
+    />
   );
 }
 
 export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const light = tone === "light";
   return (
-    <Link href="/" className="group inline-flex items-center gap-3" aria-label="MT Distribution Channel, home">
-      <LogoMark className={`size-9 ${light ? "ring-1 ring-white/15 rounded-[10px]" : ""}`} />
-      <span className="flex flex-col leading-none">
-        <span className={`text-[1.05rem] font-bold tracking-[0.08em] ${light ? "text-white" : "text-ink-900"}`}>MTDC</span>
-        <span className={`mt-1 text-[0.68rem] font-medium tracking-[0.02em] whitespace-nowrap ${light ? "text-ink-300" : "text-ink-500"}`}>
-          MT Distribution Channel
+    <Link href="/" className="inline-flex items-center gap-3.5" aria-label="MT Distribution Channel (MTDC), home">
+      {light ? (
+        <span className="inline-flex rounded-lg bg-white px-3.5 py-2.5">
+          <LogoImage width={140} />
         </span>
+      ) : (
+        <LogoImage width={150} priority />
+      )}
+      <span
+        className={`hidden border-l pl-3.5 text-[0.72rem] leading-tight font-medium tracking-[0.02em] sm:block ${
+          light ? "border-white/15 text-ink-300" : "border-line-strong text-ink-500"
+        }`}
+      >
+        MT Distribution
+        <br />
+        Channel
       </span>
     </Link>
   );

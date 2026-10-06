@@ -145,6 +145,14 @@ Production builds (`npm run build` / `npm start`) send a Content-Security-Policy
 - Add `includeSubDomains` to HSTS only once HTTPS is confirmed for every subdomain.
 - Before launch, test the production policy on the real domain over HTTPS.
 
+### Logo
+
+The MTDC logo is `public/images/brand/mtdc-logo.webp`, used exactly as supplied (transparent background,
+navy and teal lettering). `src/components/layout/Logo.tsx` offsets its transparent margins so the
+lettering aligns with the page edge; on dark backgrounds it sits on a white panel. To replace it,
+overwrite the file and adjust the margin percentages in `Logo.tsx` if the new file's margins differ.
+The browser-tab icon (`src/app/icon.svg`) is still the temporary mark.
+
 ### Contact details
 
 Set approved details in `src/config/site.ts` (`contact`). Empty values show "To be confirmed" and are never linked.
