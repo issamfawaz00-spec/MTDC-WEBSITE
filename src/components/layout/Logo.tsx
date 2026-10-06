@@ -31,7 +31,7 @@ function LogoImage({ width, priority }: { width: number; priority?: boolean }) {
 export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const light = tone === "light";
   return (
-    <Link href="/" className="inline-flex items-center gap-3.5" aria-label="MT Distribution Channel (MTDC), home">
+    <Link href="/" className="inline-flex items-center" aria-label="MT Distribution Channel (MTDC), home">
       {light ? (
         <span className="inline-flex rounded-lg bg-white px-3.5 py-2.5">
           <LogoImage width={140} />
@@ -39,15 +39,6 @@ export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
       ) : (
         <LogoImage width={150} priority />
       )}
-      <span
-        className={`hidden border-l pl-3.5 text-[0.72rem] leading-tight font-medium tracking-[0.02em] sm:block ${
-          light ? "border-white/15 text-ink-300" : "border-line-strong text-ink-500"
-        }`}
-      >
-        MT Distribution
-        <br />
-        Channel
-      </span>
     </Link>
   );
 }
