@@ -120,6 +120,24 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   }
   await page.locator("#enquiry").screenshot({ path: path.join(out, `desktop-contact-form-${expectDelivery ? "sent" : "not-sent"}.png`) });
 
+  // Unconfirmed delivery (receiver error or lost connection): never claims
+  // success or that nothing was sent, and keeps the visitor's details (Codex finding 2)
+  for (const mode of expectDelivery ? [] : ["http-502", "network"]) {
+    await page.route("**/api/enquiry", (route) =>
+      mode === "network"
+        ? route.abort("connectionreset")
+        : route.fulfill({ status: 502, contentType: "application/json", body: '{"ok":false,"error":"delivery_failed"}' }),
+    );
+    await page.click('#enquiry button[type="submit"]');
+    await page
+      .waitForSelector("text=couldn’t confirm that your enquiry was received", { timeout: 10000 })
+      .catch(() => fail.push(`contact (${mode}): unconfirmed message`));
+    check(!(await page.isVisible("text=Nothing was submitted")), `contact (${mode}): no claim that nothing was submitted`);
+    check(!(await page.isVisible("text=Your enquiry has been sent")), `contact (${mode}): no false success`);
+    check((await page.inputValue('input[name="name"]')) === "Smoke Test", `contact (${mode}): details kept in the form`);
+    await page.unroute("**/api/enquiry");
+  }
+
   // Tabs
   await page.click('role=tab[name="Brand Partnership"]');
   await page.waitForURL(/type=partnership/);

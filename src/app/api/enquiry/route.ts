@@ -11,7 +11,8 @@ const MAX_BODY_BYTES = 20_000;
  *   200 { ok: true }                          delivered (receiver returned 2xx)
  *   422 { ok: false, error: "invalid", fields } validation failed
  *   503 { ok: false, error: "not_configured" }  no delivery destination set
- *   502 { ok: false, error: "delivery_failed" } destination rejected/unreachable
+ *   502 { ok: false, error: "delivery_failed" } no 2xx from the destination (it may
+ *                                              still have received it, e.g. on timeout)
  *   400 { ok: false, error: "bad_request" }     malformed request
  * The client only reports success on 200 + ok: true.
  */

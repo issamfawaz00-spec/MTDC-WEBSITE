@@ -23,7 +23,7 @@ type Status =
   | { kind: "idle" }
   | { kind: "sending" }
   | { kind: "sent" }
-  | { kind: "not-sent"; reason: "not_configured" | "failed" | "invalid" };
+  | { kind: "not-sent"; reason: "not_configured" | "unconfirmed" | "invalid" };
 
 const submitLabels: Record<EnquiryType, string> = {
   quote: "Send quote request",
@@ -95,9 +95,11 @@ export function EnquiryForm({
         focusFirstError(data.fields);
         return;
       }
-      announce({ kind: "not-sent", reason: data?.error === "not_configured" ? "not_configured" : "failed" });
+      // Any other failure (5xx, timeout, network loss) may still have reached
+      // the receiver, so we only say delivery could not be confirmed.
+      announce({ kind: "not-sent", reason: data?.error === "not_configured" ? "not_configured" : "unconfirmed" });
     } catch {
-      announce({ kind: "not-sent", reason: "failed" });
+      announce({ kind: "not-sent", reason: "unconfirmed" });
     }
   }
 
@@ -277,10 +279,13 @@ export function EnquiryForm({
             </p>
           </div>
         )}
-        {status.kind === "not-sent" && status.reason === "failed" && (
+        {status.kind === "not-sent" && status.reason === "unconfirmed" && (
           <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-900">
-            <p className="font-semibold">Sorry, your enquiry could not be sent.</p>
-            <p className="mt-1">Nothing was submitted. Please try again in a moment, or contact MTDC directly.</p>
+            <p className="font-semibold">We couldn&rsquo;t confirm that your enquiry was received.</p>
+            <p className="mt-1">
+              Your details are still in the form. Please try again in a moment; if it may already have gone through, our team could receive
+              it twice. If the problem continues, contact MTDC directly.
+            </p>
           </div>
         )}
         {status.kind === "not-sent" && status.reason === "invalid" && (
