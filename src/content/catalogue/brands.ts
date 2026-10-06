@@ -1,6 +1,6 @@
 import type { Brand } from "@/lib/catalogue/types";
 
-/** Brand names as supplied by MTDC. Lamoure spelling awaits packaging confirmation. No logos or exclusivity claims are supplied. */
+/** Brand names as supplied by MTDC. L’Amore spelling confirmed by MTDC on 6 October 2026. No logos or exclusivity claims are supplied. */
 export const brands: Brand[] = [
   {
     id: "zyn",
@@ -8,9 +8,9 @@ export const brands: Brand[] = [
     name: "Zyn",
   },
   {
-    id: "lamoure",
-    slug: "lamoure",
-    name: "Lamoure",
+    id: "lamore",
+    slug: "lamore",
+    name: "L’Amore",
   },
   {
     id: "rima",

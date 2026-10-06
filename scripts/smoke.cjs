@@ -70,7 +70,7 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   // Brand strip: no empty cells; an incomplete row is centred
   const strip = await page
     .locator("main ul")
-    .filter({ hasText: "Lamoure" })
+    .filter({ hasText: "L’Amore" })
     .first()
     .evaluate((ul) => {
       const box = ul.getBoundingClientRect();

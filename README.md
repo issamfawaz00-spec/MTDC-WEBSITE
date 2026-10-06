@@ -91,14 +91,14 @@ availability, featured and channel types.
 
 The sample catalogue has been replaced with 13 product entries from MTDC's supplied list:
 Zyn vegetable oil (25 kg), Zyn soya oil (25 kg, 1 L, 1.7 L, 5 L), rice (25 kg and 50 kg),
-Lamoure tomato paste (50 g, 210 g, 400 g, 2.2 kg), Rima markouk bread and shisha charcoal.
+L’Amore Tomato Mix (50 g, 210 g, 400 g, 2.2 kg), Rima markouk bread and shisha charcoal.
 
 - Category groupings and the four Home featured products are provisional for review.
 - Descriptions were approved by MTDC on 6 October 2026. They use only confirmed brands, names and sizes:
   no ingredients, quality, origin, availability or packaging claims.
 - Rice and charcoal brands are unset. Missing brands show **To be confirmed** on product details,
   and are not added to the brand strip.
-- The tomato-paste brand spelling **Lamoure** is preserved as supplied; confirm against packaging.
+- The brand is spelled **L’Amore** and the product is **Tomato Mix** (confirmed by MTDC from packaging).
 - Bread types and charcoal types/sizes still need confirmation.
 - Every availability value remains `unconfirmed`; no stock quantities or prices are supplied.
 - Product images, brand logos, manufacturers, carton configurations and suitable channels await confirmation.
