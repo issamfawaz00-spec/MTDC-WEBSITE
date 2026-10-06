@@ -107,7 +107,7 @@ export const products: Product[] = [
     id: "lamore-tomato-mix-50g",
     slug: "lamore-tomato-mix-50g",
     name: "Tomato Mix 50 g",
-    categoryId: "tomato-paste",
+    categoryId: "tomato-mix",
     description:
       "L’Amore Tomato Mix in a 50 g pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
@@ -121,7 +121,7 @@ export const products: Product[] = [
     id: "lamore-tomato-mix-210g",
     slug: "lamore-tomato-mix-210g",
     name: "Tomato Mix 210 g",
-    categoryId: "tomato-paste",
+    categoryId: "tomato-mix",
     description:
       "L’Amore Tomato Mix in a 210 g pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
@@ -135,7 +135,7 @@ export const products: Product[] = [
     id: "lamore-tomato-mix-400g",
     slug: "lamore-tomato-mix-400g",
     name: "Tomato Mix 400 g",
-    categoryId: "tomato-paste",
+    categoryId: "tomato-mix",
     description:
       "L’Amore Tomato Mix in a 400 g pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],
@@ -149,7 +149,7 @@ export const products: Product[] = [
     id: "lamore-tomato-mix-2-2kg",
     slug: "lamore-tomato-mix-2-2kg",
     name: "Tomato Mix 2.2 kg",
-    categoryId: "tomato-paste",
+    categoryId: "tomato-mix",
     description:
       "L’Amore Tomato Mix in a 2.2 kg pack size, supplied by MTDC to trade buyers in Abuja / FCT. Request a quote with the quantity you need and your delivery area.",
     images: [],

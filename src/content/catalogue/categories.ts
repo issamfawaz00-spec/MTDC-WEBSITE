@@ -24,9 +24,9 @@ export const categories: Category[] = [
     subcategories: [],
   },
   {
-    id: "tomato-paste",
-    slug: "tomato-paste",
-    name: "Tomato Paste",
+    id: "tomato-mix",
+    slug: "tomato-mix",
+    name: "Tomato Mix",
     subcategories: [],
   },
   {
