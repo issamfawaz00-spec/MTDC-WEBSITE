@@ -73,6 +73,7 @@ export default async function ContactPage() {
           <div id="enquiry" className="order-1 scroll-mt-24 lg:order-2 lg:col-span-8">
             <div className="rounded-2xl p-0 sm:p-10 sm:ring-1 sm:ring-line">
               <h2 className="text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">Send an enquiry</h2>
+              <p className="mt-3 text-ink-600">Looking for something not listed? Ask us about our full range.</p>
               <div className="mt-8">
                 <Suspense fallback={<EnquiryForm type="quote" products={products} />}>
                   <EnquiryTabs products={products} />

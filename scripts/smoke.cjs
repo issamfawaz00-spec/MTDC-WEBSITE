@@ -165,6 +165,9 @@ const shotName = (p) => (p === "/" ? "home" : p.slice(1).replace(/\//g, "-"));
   const productValue = await page.locator('select[name="productSlug"]').inputValue();
   check(productValue === "zyn-vegetable-oil-25kg", "contact: product pre-selected from product page");
 
+  // Generic 'full range' line on the Contact page
+  check(await page.isVisible("text=Looking for something not listed? Ask us about our full range."), "contact: full-range line shown");
+
   // Validation
   await page.click('button[type="submit"]');
   check((await page.locator('[aria-invalid="true"]').count()) >= 4, "contact: validation errors shown");
